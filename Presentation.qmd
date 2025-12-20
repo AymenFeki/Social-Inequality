@@ -1,0 +1,192 @@
+---
+title: "Social Inequality"
+subtitle: "Trends, International Differences and Societal Impacts"
+author: "Aymen Feki, Aziz Gheni, Fadi Bouachour, Moez Daghfous"
+institute: "Dr. Hoffmann"
+date: "2025-12-18"
+format:
+  revealjs:
+    css: customstyle.css
+    embed-resources: true
+    slide-number: c
+    logo: "Results/LMU_Logo.svg"
+editor: visual
+---
+
+```{r setup, include=FALSE, warning=FALSE}
+source("env_setup.R")
+source("Program/functions.R")
+source("Program/load_data.R")
+source("Program/Main.R")
+```
+
+# Agenda
+
+::: incremental
+1.  Overview and Terminology
+
+2.  Data Analysis
+
+    Dynamic and International Differences in Social Inequality
+
+    Societal Correlates of Social Inequality
+
+3.  Summary and Discussion
+:::
+
+# Overview
+
+::: incremental
+-   Trends analyzed from 2000 to 2023.
+
+-   Development of Inequality within and across countries and continents analyzed using Indices.
+
+-   Relationship between Income Inequality and societal outcomes.
+:::
+
+# Terminology {.custom-smaller}
+
+::: incremental
+-   **Gini Index :** Income Inequality *\[0 = equal, 1 = unequal\]*
+-   **Gender Inequality Index (GII) :** Gender Inequality (Health, Empowerment and Labor) *\[0 = equal, 1 = unequal\]*
+-   **Democracy Index :** Measures democracy *\[0–10, higher = more democratic\]*
+-   **Universal Health Coverage Service Coverage Index (UHCSCI) :** Evaluates essential health services *\[0-100, higher = better coverage\]*
+:::
+
+# Agenda
+
+[1. Overview and Terminology]{style="color:lightgray;"}\
+
+2.  Data Analysis
+
+    Dynamic and International Differences in Social Inequality\
+
+    [Societal Correlates of Social Inequality]{style="color:lightgray;"}\
+
+[3. Summary and Discussion]{style="color:lightgray;"}\
+
+# Income Inequality
+
+## Gini Index
+
+```{r gini_density, echo=FALSE, fig.align='center', fig.dpi=100, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+gini.density
+```
+
+## Continental Changes Over Time
+
+```{r gini_continents_plot, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+gini.continents.plot
+```
+
+## International Changes Over Time
+
+```{r gini_countries_plot, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+gini.countries.plot
+```
+
+## Cross-Country Comparison
+
+```{r gini_countries_boxplot, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+gini.countries.boxplot
+```
+
+# Gender Inequality
+
+## Gender Inequlity Index
+
+```{r gii_density, echo=FALSE, fig.align='center', fig.dpi=100, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+gii.density
+```
+
+## International Changes Over Time
+
+```{r gii_countries_plot, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+gii.countries.plot
+```
+
+## Cross-Country Comparison
+
+```{r gii_countries_boxplot, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+gii.countries.boxplot
+```
+
+# Agenda
+
+[1. Overview and Terminology]{style="color:lightgray;"}\
+
+2.  Data Analysis
+
+    [Dynamic and International Differences in Social Inequality]{style="color:lightgray;"}\
+
+    Societal Correlates of Social Inequality
+
+[3. Summary and Discussion]{style="color:lightgray;"}\
+
+## Democracy
+
+```{r scatter_gini_democracy, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+scatter.gini.democracy
+```
+
+## Democracy
+
+```{r scatter_highlight_gini_democracy, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+scatter.highlight.gini.democracy
+```
+
+## Homicide Rate
+
+```{r scatter_gini_homicide, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+scatter.gini.homicide
+```
+
+## Homicide Rate
+
+```{r scatter_highlight_gini_homicide, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+scatter.highlight.gini.homicide
+```
+
+## Healthcare Access
+
+```{r scatter_gini_healthcare, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+scatter.gini.healthcare
+```
+
+## Healthcare Access
+
+```{r scatter_highlight_gini_healthcare, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+scatter.highlight.gini.healthcare
+```
+
+# Agenda
+
+[1. Overview and Terminology]{style="color:lightgray;"}
+
+[2. Data Analysis]{style="color:lightgray;"}
+
+3.  Summary and Discussion
+
+# Summary
+
+::: incremental
+-   Social Inequality evolves very differently across countries over time.
+
+-   Moderate correlation between the Gini coefficient and the democracy index.
+
+-   Noticeable association between the Gini coefficient and the homicide rates.
+
+-   Non-negligible negative relationship between Income Inequality and access to healthcare.
+:::
+
+# Discussion
+
+::: incremental
+-   Possible data Inaccuracies due to political factors and the sensitivity of the subject
+
+-   The Indices used are simplifications and do not fully capture the complexity of social Inequality.
+
+-   The observed correlations may be driven by a few influential countries, which could distort the overall relationships.
+
+-   Missing and Insufficient data for several countries
+:::
