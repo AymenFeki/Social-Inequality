@@ -15,9 +15,7 @@ editor: visual
 
 ```{r setup, include=FALSE, warning=FALSE}
 source("env_setup.R")
-source("Program/functions.R")
-source("Program/load_data.R")
-source("Program/Main.R")
+source("Program/main.R")
 ```
 
 # Agenda
@@ -27,30 +25,50 @@ source("Program/Main.R")
 
 2.  Data Analysis
 
-    Dynamic and International Differences in Social Inequality
+    Dynamics and International Differences in Social Inequality
 
     Societal Correlates of Social Inequality
 
 3.  Summary and Discussion
 :::
 
-# Overview
+# Research Questions {.custom-smaller}
+
+Understanding how social inequality evolves over time and how it interacts with key societal outcomes is essential for assessing economic fairness, social cohesion, and institutional stability.\
+Against this background, this project addresses the following questions:
 
 ::: incremental
--   Trends analyzed from 2000 to 2023.
+1.  How has social inequality evolved over time within individual countries and at the global level?
 
--   Development of Inequality within and across countries and continents analyzed using Indices.
+2.  To what extent do countries differ in their levels of social inequality?
 
--   Relationship between Income Inequality and societal outcomes.
+3.  How is social inequality related to other societal factors?
 :::
+
+# Overview {.custom-smaller2}
+
+-   **Data type:** Longitudinal country–year panel data (2000–2023)
+
+-   **Source:** Our World in Data
+
+-   **Coverage:** Global country coverage with an unbalanced panel structure due to heterogeneous data availability.
+
+-   **Datasets:**
+
+    -   Income Inequality
+    -   Gender Inequality Index
+    -   Economist Intelligence Unit Democracy Index
+    -   Homicide Rate
+    -   Universal Health Coverage Service Coverage Index
+    -   World Population
 
 # Terminology {.custom-smaller}
 
 ::: incremental
 -   **Gini Index :** Income Inequality *\[0 = equal, 1 = unequal\]*
 -   **Gender Inequality Index (GII) :** Gender Inequality (Health, Empowerment and Labor) *\[0 = equal, 1 = unequal\]*
--   **Democracy Index :** Measures democracy *\[0–10, higher = more democratic\]*
--   **Universal Health Coverage Service Coverage Index (UHCSCI) :** Evaluates essential health services *\[0-100, higher = better coverage\]*
+-   **Economist Intelligence Unit Democracy Index (EIU-DI) :** Measures democratic quality *\[0–10, higher = more democratic\]*
+-   **Universal Health Coverage Service Coverage Index (UHC-SCI) :** Evaluates essential health services *\[0-100, higher = better coverage\]*
 :::
 
 # Agenda
@@ -59,7 +77,7 @@ source("Program/Main.R")
 
 2.  Data Analysis
 
-    Dynamic and International Differences in Social Inequality\
+    Dynamics and International Differences in Social Inequality\
 
     [Societal Correlates of Social Inequality]{style="color:lightgray;"}\
 
@@ -67,9 +85,9 @@ source("Program/Main.R")
 
 # Income Inequality
 
-## Gini Index
+## Gini Index (After Tax)
 
-```{r gini_density, echo=FALSE, fig.align='center', fig.dpi=100, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+```{r gini_density, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
 gini.density
 ```
 
@@ -93,9 +111,9 @@ gini.countries.boxplot
 
 # Gender Inequality
 
-## Gender Inequlity Index
+## Gender Inequality Index
 
-```{r gii_density, echo=FALSE, fig.align='center', fig.dpi=100, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+```{r gii_density, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
 gii.density
 ```
 
@@ -117,7 +135,7 @@ gii.countries.boxplot
 
 2.  Data Analysis
 
-    [Dynamic and International Differences in Social Inequality]{style="color:lightgray;"}\
+    [Dynamics and International Differences in Social Inequality]{style="color:lightgray;"}\
 
     Societal Correlates of Social Inequality
 
@@ -138,25 +156,25 @@ scatter.highlight.gini.democracy
 ## Homicide Rate
 
 ```{r scatter_gini_homicide, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
-scatter.gini.homicide
+scatter.gini.homicide.rate
 ```
 
 ## Homicide Rate
 
 ```{r scatter_highlight_gini_homicide, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
-scatter.highlight.gini.homicide
+scatter.highlight.gini.homicide.rate
 ```
 
 ## Healthcare Access
 
 ```{r scatter_gini_healthcare, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
-scatter.gini.healthcare
+scatter.gini.healthcare.access
 ```
 
 ## Healthcare Access
 
 ```{r scatter_highlight_gini_healthcare, echo=FALSE, fig.align='center', fig.dpi=300, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
-scatter.highlight.gini.healthcare
+scatter.highlight.gini.healthcare.access
 ```
 
 # Agenda
@@ -167,26 +185,34 @@ scatter.highlight.gini.healthcare
 
 3.  Summary and Discussion
 
-# Summary
+# Summary {.custom-smaller2}
 
 ::: incremental
--   Social Inequality evolves very differently across countries over time.
+-   Countries exhibit markedly different trajectories and rates of change in inequality over time.
 
--   Moderate correlation between the Gini coefficient and the democracy index.
+-   The overall level of inequality differs substantially across countries.
 
--   Noticeable association between the Gini coefficient and the homicide rates.
+-   Inequality indicators display distinct distributions across countries and over time.
 
--   Non-negligible negative relationship between Income Inequality and access to healthcare.
+-   Weak negative monotonic relationship between income inequality and the Democracy Index.
+
+-   Strong positive monotonic relationship between income inequality and homicide rate.
+
+-   Moderate negative monotonic relationship between income inequality and healthcare access.
 :::
 
-# Discussion
+# Discussion {.custom-smaller2}
 
 ::: incremental
--   Possible data Inaccuracies due to political factors and the sensitivity of the subject
+-   **Data quality and reporting issues:**
 
--   The Indices used are simplifications and do not fully capture the complexity of social Inequality.
+    -   Political incentives may affect the reporting of democracy, crime, and inequality.
+    -   Authoritarian regimes may underreport negative outcomes.
+    -   Survey-based inequality measures can miss top incomes.
 
--   The observed correlations may be driven by a few influential countries, which could distort the overall relationships.
+-   **Index simplifications:** Composite indices (Gini, Democracy, Healthcare) provide simplified views and cannot capture all dimensions of social inequality.
 
--   Missing and Insufficient data for several countries
+-   **Sensitivity to influential countries:** Correlations may be driven by a small number of extreme cases.
+
+-   **Uneven data coverage:** Missing values and unbalanced time series reduce cross-country comparability.
 :::

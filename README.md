@@ -1,77 +1,99 @@
-### Social Inequality
 
-### Trends over Time and Associations with other factors
+# Social Inequality  
+## Trends over Time and Associations with Societal Factors
 
-**Author:** Aymen Feki, Moez Daghfous, Aziz Gheni, Fadi Bouachour 
-**Responsible for content:**
+**Authors:**  Aymen Feki, Moez Daghfous, Aziz Gheni, Fadi Bouachour  
 
-## General Instructions
+Responsible for content: Aymen Feki
+---
 
-This repository contains all data, programs, and results for the project\
-**"Social Inequality – Trends over Time and Associations with Democratic Values, Life Satisfaction, Health, and Safety".**
+## General Information
+
+This repository contains all data, scripts, and results required to reproduce the project:
+
+**“Social Inequality – Trends over Time and Associations with Democratic Values, Health, and Safety.”**
 
 The project was developed and tested using:
 
--   **R version 4.5.1**
+- **R version 4.5.1**
 
-All required packages are available on CRAN.
+All required packages are available from CRAN.  
+For a complete list of packages used in the analysis, see `env_setup.R` in the root directory.
 
-For a full list of packages loaded during the analysis, please refer to\
-`env_setup.R` in the root directory of our project.
+---
 
-## Usage
+## Usage Instructions
 
-1.  **First**, run `env_setup.R`.\
-    This script installs and loads all required packages, sets global options,\
-    and loads helper functions for plotting and data handling.
+1. **Environment setup**  
+   Run `env_setup.R` first.  
+   This script installs and loads all required packages, sets global options, initializes helper functions for data handling and visualization,
+loads the data, and performs preprocessing.
 
-2.  **To clean the data and generate the plots**, run `Main.R` \ found in the 
-    Program folder.
+2. **Data processing and analysis**  
+   Run `main.R` located in the `Program/` directory.  
+   This script orchestrates the full workflow by sourcing the analysis scripts
+   (`analysis_income_inequality.R`, `analysis_gender_inequality.R`,
+   `analysis_societal_impacts.R`), which generate and save all figures to `Results/`.
 
-3.  **To generate the final report or presentation**, open `presentation.qmd`\
-    in the root directory.
+3. **Report / presentation generation**  
+   Open and render `Presentation.qmd` in the root directory to generate the final presentation.
+
+---
 
 ## Directory Structure
 
 ### **Root Directory**
 
--   `env_setup.R`\
--   `README.md`\
--   `Executive_Summary.pdf`
--   `Presentation.qmd`\
+- `env_setup.R` – environment and package setup  
+- `README.md` – project documentation  
+- `Executive_Summary.pdf` – summary of results  
+- `Presentation.qmd` – Quarto presentation source  
+
+---
 
 ### **Data**
 
-This directory contains the raw data used for the analysis, including:
+Contains the raw data used in the analysis (CSV format), including:
 
--   Gini Coefficient\
--   Gender Inequality Index\
--   Democracy Index\
--   Homicide Rate\
+- Gini Index (before and after tax)
+- Gender Inequality Index
+- EIU Democarcy Index
+- Homicide Rate
+- UHC Service Coverage Index (Healthcare Access)
+- World Population
 
-All files are provided as `.csv`.
+---
 
-### **Work.Data**
+### **Work.data**
 
-This directory is intended for the processed dataset.\
+Contains processed and intermediate datasets generated during data cleaning and preprocessing in RDS format.
+
+---
 
 ### **Program**
 
-This directory contains all R scripts used for data cleaning, preprocessing, visualization, and analysis.\
-File names reflect their functionality:
+Contains all R scripts used for data loading, preprocessing, visualization, and analysis:
 
--   `functions.R`\
--   `load_data.R`\
--   `Main.R`\
+- `config.R` – global configuration (selected countries/continents, color palette, ggplot theme)
+- `utils.R` – helper utilities and statistical functions (e.g., Spearman correlation, weighted stats, average calculation)
+- `functions.R` – plotting functions (time-series, density plots, boxplots, scatter plots)
+- `load_data.R` – data preparation pipeline (loads raw CSVs, harmonizes columns, merges datasets, saves/loads RDS files)
+- `analysis_income_inequality.R` – figures for income inequality (density, time trends, boxplots)
+- `analysis_gender_inequality.R` – figures for gender inequality (density, time trends, boxplots)
+- `analysis_societal_impacts.R` – correlation/scatter plots between inequality and societal outcomes
+- `main.R` – orchestrates the full analysis workflow by running the analysis scripts 
+
+---
 
 ### **Results**
 
-This directory contains all generated results, including:
+This directory contains the results (figures) of our analysis. They are all saved in `.png` format.
 
--   Figures (`.png`)
+---
 
 ## Additional Notes
 
--   All analyses rely on publicly available data sources.\
--   The project focuses on the relationship between social inequality and major societal outcomes such as democracy, crime.\
--   The repository structure is designed for reproducibility and clarity, following best practices from previous statistical projects.
+- All analyses are based on publicly available data sources (ourworldindata.org).
+- The repository structure is designed to ensure reproducibility, clarity, and modularity, following best practices for statistical data analysis projects.
+
+---

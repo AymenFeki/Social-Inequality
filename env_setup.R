@@ -1,97 +1,112 @@
-### ENVIRONMENT SETUP FILE FOR INEQUALITY PROJECT
-### This script sets the working directory, installs missing packages,
-### loads libraries, cleans objects, and sources all project functions.
+# =========================================
+# Environment Setup Script
+# Social Inequality Project
+# =========================================
+#
+# Sourcing this file sets up the complete R environment
+# required for running the Social Inequality project.
+#
+# This script:
+# - Sets the working directory (RStudio only)
+# - Installs and loads all required CRAN packages
+# - Loads global configuration and helper functions
+# - Loads and processes the raw data
+# - Fixes invalid object names (macOS issue)
+# - Defines a flag indicating successful initialization
+#
+# This script should be run ONCE per session
+# before running main.R
+# =========================================
 
-## Set working directory to the folder where this file is located
+# ---- Set working directory ----
+#
+# When run interactively in RStudio, set the working directory
+# to the location of this script so that relative paths work correctly.
+# This step is skipped in non-interactive environments.
 
-if (rstudioapi::isAvailable()) {
+if (interactive() &&
+    requireNamespace("rstudioapi", quietly = TRUE) &&
+    rstudioapi::isAvailable()) {
   setwd(dirname(rstudioapi::getSourceEditorContext()$path))
-} else {
-  message("RStudio not available — skipping setwd()")
 }
 
-## Install missing packages (CRAN only)
+# ---- Required packages (CRAN only) ----
+#
+# These packages are required for data handling, visualization,
+# validation, and statistical analysis throughout the project.
 
 packages <- c(
   "dplyr",
-  "readr",
-  "stringr",
-  "tidyr",
-  "tidyverse",
   "ggplot2",
-  "checkmate",
-  "janitor",
+  "stringr",
   "forcats",
+  "checkmate",
   "countrycode",
-  "rlang"
+  "rlang",
+  "purrr",
+  "readr",
+  "tidyr"
 )
+
+# ---- Install and load packages ----
+#
+# Each package is installed only if missing, then loaded.
+# This ensures reproducibility on a clean system.
 
 for (pkg in packages) {
   if (!require(pkg, character.only = TRUE, quietly = TRUE)) {
-    install.packages(pkg)
+    install.packages(pkg, dependencies = TRUE)
     library(pkg, character.only = TRUE)
   }
 }
 
-## Global ggplot Theme
+# ---- Load project configuration and helper functions ----
+#
+# These scripts define:
+# - global.colors, sel.countries, continents
+# - ggplot2 theme settings
+# - statistical helper functions
+# - plotting functions used in all analyses
 
-theme_set(
-  theme_minimal(base_size = 10) +
-    theme(
-      plot.title = element_text(hjust = 0.5),
-      plot.subtitle = element_text(hjust = 0.5),
-      legend.title = element_text(size = 15),
-      legend.text = element_text(size = 10),
-      legend.key.size = unit(1, "lines"),
-      legend.box.margin = margin_auto(1),
-      axis.ticks.length = unit(0.3, "cm"),
-      axis.ticks = element_line(linewidth = 0.5),
-      panel.border = element_rect(color = "black", fill = NA),
-      legend.position = "right",
-      panel.grid.minor = element_blank()
-    )
-)
+source("Program/config.R")
+source("Program/utils.R")
+source("Program/functions.R")
 
-# theme_set(
-#   theme_minimal(base_size = 20) +
-#     theme(
-#       # Legend
-#       legend.title = element_text(size = 30),
-#       legend.text = element_text(size = 25),
-#       legend.key.size = unit(2.5, "lines"),
-#       legend.box.margin = margin_auto(6),
-#       legend.position = "right",
-#       
-#       # Axis titles (THIS is what you want for labels)
-#       axis.title.x = element_text(size = 30, margin = margin(t = 15)),
-#       axis.title.y = element_text(size = 30, margin = margin(r = 15)),
-#       
-#       # Axis tick labels (numbers)
-#       axis.text.x = element_text(size = 24),
-#       axis.text.y = element_text(size = 24),
-#       
-#       # Axis ticks (lines)
-#       axis.ticks.length = unit(0.4, "cm"),
-#       axis.ticks = element_line(linewidth = 0.8),
-#       
-#       # Panel
-#       panel.border = element_rect(color = "black", fill = NA),
-#       panel.grid.minor = element_blank()
-#     )
-# )
+# ---- Prepare and load processed data ----
+#
+# The data preparation function is executed here ONCE.
+# This step:
+# - loads raw CSV files
+# - cleans and harmonizes datasets
+# - saves processed data as RDS files
+# - loads the processed data into the global environment
 
-## if variables named with "/" at first, which often occurs for MAC users, rename them
+source("Program/load_data.R")
+prepare_data()                 # creates/updates RDS if needed
+data <- load_processed_data()  # loads into memory
 
-for (var in ls()) {
-  if (str_detect(var, "/")) {
-    new_var <- gsub("/", "", var)
-    assign(new_var, get(var))
+countries.data <- data$countries.data
+regions        <- data$regions
+data.avgs      <- data$data.avgs
+
+# ---- macOS variable-name sanitation ----
+#
+# On some macOS systems, object names may contain invalid
+# characters such as "/". This loop fixes such names to
+# avoid issues with tidyverse and ggplot2 evaluation.
+
+for (var in ls(envir = .GlobalEnv)) {
+  if (stringr::str_detect(var, "/")) {
+    clean_name <- gsub("/", "", var)
+    assign(clean_name, get(var, envir = .GlobalEnv), envir = .GlobalEnv)
+    rm(list = var, envir = .GlobalEnv)
   }
 }
 
-## Remove temporary variables created in this setup file
+# ---- Environment initialization flag ----
+#
+# This flag is checked by main.R to ensure that the environment
+# has been properly initialized before any analysis is run.
 
-rm(pkg, packages)
-rm(var)
-
-message("Environment successfully initialized")
+.env_initialized <- TRUE
+message("Environment successfully initialized.")
