@@ -98,6 +98,4 @@ All analyses in this repository are based on data obtained from Our World in Dat
 - Visualizations, articles, and data processing by Our World in Data are licensed under [Creative Commons BY (CC BY)](https://creativecommons.org/licenses/by/4.0/).
 - Most of the underlying data comes from third-party providers (e.g., World Bank, United Nations, WHO). These data are subject to the license terms of the original providers.
 - We credit both Our World in Data and the original data providers in our documentation and cite them in all outputs.
-
-For detailed source information for each variable, see the `Data/` directory and the documentation in `Program/load_data.R`.
 ---
