@@ -91,9 +91,13 @@ This directory contains the results (figures) of our analysis. They are all save
 
 ---
 
-## Additional Notes
+## Data sources and licensing
 
-- All analyses are based on publicly available data sources (ourworldindata.org).
-- The repository structure is designed to ensure reproducibility, clarity, and modularity, following best practices for statistical data analysis projects.
+All analyses in this repository are based on data obtained from Our World in Data (https://ourworldindata.org).
 
+- Visualizations, articles, and data processing by Our World in Data are licensed under [Creative Commons BY (CC BY)](https://creativecommons.org/licenses/by/4.0/).
+- Most of the underlying data comes from third-party providers (e.g., World Bank, United Nations, WHO). These data are subject to the license terms of the original providers.
+- We credit both Our World in Data and the original data providers in our documentation and cite them in all outputs.
+
+For detailed source information for each variable, see the `Data/` directory and the documentation in `Program/load_data.R`.
 ---
